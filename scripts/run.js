@@ -7,12 +7,20 @@ const main = async() => {
     console.log("Deployed to the following address: ", contract.address);
     console.log("Deployed by the following address: ", owner.address);
 
+
+    let messageTxn = await contract.sendMessage("This is a first test");
+    await messageTxn.wait();
+
     let totalMessagesCount = await contract.getTotalMessagesCount();
 
-    const messageTxn = await contract.connect(randomPerson).message();
+    messageTxn = await contract.connect(randomPerson).sendMessage("This is another test");
     await messageTxn.wait();
 
     totalMessagesCount = await contract.getTotalMessagesCount();
+    
+    let listOfMessages = await contract.getAllMessages();
+    console.log(listOfMessages);
+
 }
 
 const runMain = async () => {
