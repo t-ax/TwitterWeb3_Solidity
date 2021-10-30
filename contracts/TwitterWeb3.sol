@@ -7,27 +7,28 @@ import "hardhat/console.sol";
 contract TwitterWeb3{
     uint totalMessagesCount;
 
-    event NewMessage(address indexed from, string message, uint timestamp);
+    event NewMessage(address indexed from, string message, string image, uint timestamp);
 
 
     struct Message {
         address sender;
         string message;
+        string image; //it's a url
         uint timestamp;
     }
 
     Message[] listOfMessages;
 
     constructor(){
-        console.log("aofhahepahgpahigpeahgpaeig");
+        
     }
 
-    function sendMessage(string memory _message) public {
+    function sendMessage(string memory _message, string memory _image) public {
         totalMessagesCount+=1;
         console.log("%s has waved", msg.sender);
 
-        listOfMessages.push(Message(msg.sender, _message, block.timestamp));
-        emit NewMessage(msg.sender, _message, block.timestamp);
+        listOfMessages.push(Message(msg.sender, _message, _image, block.timestamp));
+        emit NewMessage(msg.sender, _message, _image, block.timestamp);
     }
 
     function getAllMessages() public view returns (Message[] memory) {

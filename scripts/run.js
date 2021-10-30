@@ -8,12 +8,12 @@ const main = async() => {
     console.log("Deployed by the following address: ", owner.address);
 
 
-    let messageTxn = await contract.sendMessage("This is a first test");
+    let messageTxn = await contract.sendMessage("This is a first test","");
     await messageTxn.wait();
 
     let totalMessagesCount = await contract.getTotalMessagesCount();
 
-    messageTxn = await contract.connect(randomPerson).sendMessage("This is another test");
+    messageTxn = await contract.connect(randomPerson).sendMessage("This is another test","");
     await messageTxn.wait();
 
     totalMessagesCount = await contract.getTotalMessagesCount();
